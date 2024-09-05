@@ -1,0 +1,123 @@
+body {
+    font-size: 15px;
+    text-align: center;
+    background:rgba(216, 112, 147, 0.215);
+    cursor:url(./female_fairy1.png),default;
+  }
+
+  .header1{
+    background-color: palevioletred;
+    float: left;
+    text-align: left;
+    padding: 20px;
+  }
+  .header2{
+    background-color: palevioletred;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    padding: 60px;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: palevioletred;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover, .dropdown:hover .dropbtn {
+    background-color: rgb(252, 241, 243);
+    color:palevioletred;
+  }
+  
+  li.dropdown {
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(252, 241, 243);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(251, 229, 229, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: palevioletred;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: palevioletred;
+    color:white
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+.header1{
+    background-color: palevioletred;
+    float: left;
+    text-align: left;
+    padding: 20px;
+}
+.header2{
+    background-color: palevioletred;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    padding: 60px;
+}
+
+/*注册页面样式*/
+.login-box{
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+    border: 20px  white;
+    padding: 20px;
+}
+
+.column{
+    float: left;
+    width: 31.62%;
+    padding: 5px;
+}
+.row::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width:600px){
+    .column{
+        width: 100%;
+    }
+}
+
+/*页脚样式*/
+.footer {
+    background-color: palevioletred;
+    text-align: center;
+    padding: 3px;
+    font-size: 10px;
+    color: white;
+  }

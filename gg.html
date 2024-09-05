@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五子棋游戏</title>
+    <link href="../style/style.css" type="text/css" rel="stylesheet">
+
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(15, 35px);
+            grid-template-rows: repeat(15, 35px);
+            gap: 2px;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .cell {
+            width: 35px;
+            height: 35px;
+            background-color: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cell.black {
+            content: '👣';
+            background-color: white;
+        }
+
+        .cell.white {
+            content:'👻';
+            background-color: white;
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+    <script>
+        fetch('/header.html')
+           .then(response => response.text())
+           .then(data => document.getElementById('header').innerHTML = data)
+    </script>
+    </div>
+
+    <h2>五子棋游戏</h2>
+    <div class="board" id="board"></div>
+    <div class="status" id="status"></div>
+
+    <script>
+        const boardSize = 15;
+        let board = Array(boardSize).fill().map(() => Array(boardSize).fill(''));
+        let currentPlayer = '👣';
+        let gameOver = false;
+    
+        const boardElement = document.getElementById('board');
+        const statusElement = document.getElementById('status');
+    
+        function checkWinner(x, y, player) {
+            const directions = [
+                [[0, 1], [0, -1]],
+                [[1, 0], [-1, 0]],
+                [[1, 1], [-1, -1]],
+                [[1, -1], [-1, 1]]
+            ];
+    
+            for (let direction of directions) {
+                let count = 1;
+    
+                for (let i = 0; i < 2; i++) {
+                    let [dx, dy] = direction[i];
+                    let nx = x + dx;
+                    let ny = y + dy;
+    
+                    while (nx >= 0 && ny >= 0 && nx < boardSize && ny < boardSize && board[nx][ny] === player) {
+                        count++;
+                        nx += dx;
+                        ny += dy;
+                    }
+                }
+    
+                if (count >= 5) {
+                    return true;
+                }
+            }
+    
+            return false;
+        }
+    
+        function handleClick(x, y) {
+            if (board[x][y] === '' && !gameOver) {
+                board[x][y] = currentPlayer;
+                const cell = document.getElementById(`cell-${x}-${y}`);
+                cell.textContent = currentPlayer; // 将 emoji 直接放到单元格中
+    
+                if (checkWinner(x, y, currentPlayer)) {
+                    statusElement.textContent = `${currentPlayer} 胜！`;
+                    gameOver = true;
+                } else {
+                    currentPlayer = currentPlayer === '👣' ? '👻' : '👣'; // 切换 emoji
+                    statusElement.textContent = `当前轮到 ${currentPlayer}`;
+                }
+            }
+        }
+    
+        function createBoard() {
+            for (let i = 0; i < boardSize; i++) {
+                for (let j = 0; j < boardSize; j++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    cell.id = `cell-${i}-${j}`;
+                    cell.addEventListener('click', () => handleClick(i, j));
+                    boardElement.appendChild(cell);
+                }
+            }
+        }
+    
+        createBoard();
+        statusElement.textContent = `当前轮到 ${currentPlayer}`;
+    </script>
+    
+
+</body>
+</html>
